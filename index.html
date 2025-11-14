@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>绿色网络 - 守护地球</title>
+    <meta name="description" content="全球环保组织，致力于植树造林、海洋保护、清洁能源与可持续发展" />
 
+    <!-- Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+    <style>
+        /* === CSS 变量与主题 === */
         :root {
             --primary: #2e7d32;
             --secondary: #4caf50;
@@ -20,106 +18,142 @@
             --light: #e8f5e9;
             --dark: #1b5e20;
             --text: #333333;
-            --white: #ffffff;
+            --bg: #ffffff;
+            --card-bg: #ffffff;
+            --border: #dee2e6;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --text: #e9ecef;
+            --card-bg: #1e1e1e;
+            --border: #333;
+            --light: #2d2d2d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background-color: var(--light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
         }
 
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
+        a { color: var(--primary); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* === 导航栏 === */
+        .navbar {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s;
         }
 
         .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
         }
 
-        .logo i {
-            font-size: 2rem;
-        }
+        .logo i { font-size: 1.8rem; }
 
-        nav ul {
+        .nav-links {
             display: flex;
-            list-style: none;
+            gap: 2rem;
         }
 
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
+        .nav-links a {
+            color: var(--text);
             font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
+            transition: color 0.2s;
             position: relative;
         }
 
-        nav ul li a:hover {
-            color: var(--accent);
+        .nav-links a:hover {
+            color: var(--primary);
         }
 
-        nav ul li a::after {
+        .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -5px;
             left: 0;
             width: 0;
             height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
+            background: var(--accent);
+            transition: width 0.3s;
         }
 
-        nav ul li a:hover::after {
+        .nav-links a:hover::after {
             width: 100%;
         }
 
+        .menu-toggle, .theme-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* === Hero 部分 === */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1600&q=80');
             background-size: cover;
             background-position: center;
             height: 80vh;
             display: flex;
             align-items: center;
             text-align: center;
-            color: var(--white);
+            color: white;
         }
 
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
+            padding: 0 1rem;
         }
 
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
         }
 
         .hero p {
@@ -129,26 +163,26 @@
 
         .btn {
             display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
+            background: var(--accent);
+            color: white;
             padding: 0.8rem 2rem;
             border-radius: 50px;
-            text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .btn:hover {
-            background-color: var(--primary);
+            background: var(--primary);
             transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
         }
 
-        section {
-            padding: 5rem 0;
+        /* === 通用容器 === */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
 
         .section-title {
@@ -159,7 +193,6 @@
         .section-title h2 {
             font-size: 2.5rem;
             color: var(--primary);
-            margin-bottom: 1rem;
             position: relative;
             display: inline-block;
         }
@@ -172,50 +205,34 @@
             transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background-color: var(--accent);
+            background: var(--accent);
             border-radius: 2px;
         }
 
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
+        /* === 关于我们 === */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
             align-items: center;
+            margin-bottom: 3rem;
         }
 
         .about-img {
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
         .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s;
         }
 
         .about-img:hover img {
             transform: scale(1.05);
         }
 
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
+        /* === 统计数字 === */
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -225,15 +242,16 @@
 
         .stat-item {
             text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border: 1px solid var(--border);
         }
 
         .stat-item:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
         }
 
         .stat-item i {
@@ -248,26 +266,21 @@
             margin-bottom: 0.5rem;
         }
 
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
+        /* === 项目卡片 === */
         .initiatives-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
+            margin-top: 2rem;
         }
 
         .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
+            background: var(--card-bg);
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border: 1px solid var(--border);
         }
 
         .initiative-card:hover {
@@ -283,7 +296,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s;
         }
 
         .initiative-card:hover .initiative-img img {
@@ -300,15 +313,13 @@
             color: var(--dark);
         }
 
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
+        /* === 行动号召 === */
         .cta {
             background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
+            color: white;
             text-align: center;
-            padding: 5rem 0;
+            padding: 5rem 1rem;
+            margin: 3rem 0;
         }
 
         .cta h2 {
@@ -316,28 +327,67 @@
             margin-bottom: 1.5rem;
         }
 
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
         .cta .btn {
-            background-color: var(--white);
+            background: white;
             color: var(--primary);
         }
 
         .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
+            background: var(--accent);
+            color: white;
         }
 
+        /* === 表单 === */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(46,125,50,0.1);
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* === 页脚 === */
         footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
+            background: var(--dark);
+            color: white;
+            padding: 3rem 1rem 1rem;
         }
 
         .footer-content {
@@ -345,6 +395,10 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
             margin-bottom: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 1rem;
         }
 
         .footer-column h3 {
@@ -361,362 +415,385 @@
             left: 0;
             width: 40px;
             height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
+            background: var(--accent);
         }
 
         .social-links {
             display: flex;
             gap: 1rem;
+            margin-top: 1rem;
         }
 
         .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
             width: 40px;
             height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s;
         }
 
         .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
+            background: var(--accent);
+            transform: translateY(-3px);
         }
 
         .copyright {
             text-align: center;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
         }
 
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
+        /* === 移动端适配 === */
         @media (max-width: 992px) {
-            .about-content {
+            .about-content, .stats, .initiatives-grid, .footer-content {
                 grid-template-columns: 1fr;
             }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
             .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
                 width: 100%;
-                background-color: var(--primary);
+                background: var(--card-bg);
                 flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                padding: 1rem;
+                transition: left 0.3s;
+                border-bottom: 1px solid var(--border);
             }
-            
-            nav ul.active {
-                display: flex;
+
+            .nav-links.active {
+                left: 0;
             }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
+
+            .menu-toggle, .theme-toggle {
                 display: block;
             }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
 
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
+            .theme-toggle {
+                display: flex;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
             <div class="logo">
                 <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
+                <span>绿色网络</span>
             </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+            <button class="menu-toggle" aria-label="菜单">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links">
+                <a href="#home">首页</a>
+                <a href="#about">关于我们</a>
+                <a href="#initiatives">项目</a>
+                <a href="#contact">联系</a>
+            </div>
+            <button class="theme-toggle" aria-label="暗黑模式">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
-    </header>
+    </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+        <div class="hero-content">
+            <h1>守护地球，守护未来</h1>
+            <p>加入全球环保行动，通过植树、海洋保护和社区教育，共同创造可持续世界。</p>
+            <a href="#contact" class="btn">立即参与</a>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
+    <div class="container">
+
+        <!-- 关于我们 -->
+        <section id="about">
             <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
+                <h2>关于绿色网络</h2>
+                <p>我们是致力于环境保护与可持续发展的全球社区</p>
             </div>
             <div class="about-content">
                 <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
+                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=800&q=80" alt="团队植树">
                 </div>
                 <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
+                    <h3>我们的使命</h3>
+                    <p>绿色网络致力于通过保护自然生态系统、推广可再生能源、赋能社区行动，创造可持续未来。</p>
+                    <p>成立于2010年，我们已从小型草根组织成长为拥有超过5万名成员、覆盖120个国家的国际网络。</p>
+                    <p>我们结合科学研究、社区参与和政策倡导，应对当今最紧迫的环境挑战。</p>
+                    <a href="#" class="btn">了解更多</a>
                 </div>
             </div>
+
             <div class="stats">
                 <div class="stat-item">
                     <i class="fas fa-tree"></i>
                     <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
+                    <p>棵树已种植</p>
                 </div>
                 <div class="stat-item">
                     <i class="fas fa-users"></i>
                     <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
+                    <p>活跃成员</p>
                 </div>
                 <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
+                    <i class="fas fa-globe-asia"></i>
                     <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
+                    <p>覆盖国家</p>
                 </div>
                 <div class="stat-item">
                     <i class="fas fa-recycle"></i>
                     <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
+                    <p>清洁项目</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
+        <!-- 项目 -->
+        <section id="initiatives">
             <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
+                <h2>我们的项目</h2>
+                <p>了解我们正在实施的关键环保计划</p>
             </div>
             <div class="initiatives-grid">
                 <div class="initiative-card">
                     <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
+                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="全球造林">
                     </div>
                     <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
+                        <h3>全球造林计划</h3>
+                        <p>在世界各地种植数百万棵树，恢复生态系统，对抗气候变化，保护生物多样性。</p>
+                        <a href="#" class="btn">了解详情</a>
                     </div>
                 </div>
                 <div class="initiative-card">
                     <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
+                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?w=800&q=80" alt="海洋保护">
                     </div>
                     <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
+                        <h3>海洋保护行动</h3>
+                        <p>保护海洋生态系统，减少塑料污染，推动可持续渔业实践。</p>
+                        <a href="#" class="btn">了解详情</a>
                     </div>
                 </div>
                 <div class="initiative-card">
                     <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
+                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&q=80" alt="清洁能源">
                     </div>
                     <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
+                        <h3>清洁能源推广</h3>
+                        <p>推广太阳能、风能等清洁能源，减少对化石燃料的依赖。</p>
+                        <a href="#" class="btn">了解详情</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
+        <!-- 联系表单 -->
+        <section id="contact">
+            <div class="section-title">
+                <h2>联系我们</h2>
+                <p>加入我们，一起为地球发声</p>
+            </div>
+            <form id="contactForm" class="card" style="max-width: 700px; margin: 0 auto; padding: 2rem;" novalidate>
+                <div class="form-group">
+                    <label for="name">姓名 *</label>
+                    <input type="text" id="name" required />
+                </div>
+                <div class="form-group">
+                    <label for="email">邮箱 *</label>
+                    <input type="email" id="email" required />
+                </div>
+                <div class="form-group">
+                    <label for="message">留言 *</label>
+                    <textarea id="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn">发送消息</button>
+                <div id="formMessage" class="form-message"></div>
+            </form>
+        </section>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
+        <!-- 行动号召 -->
+        <div class="cta">
+            <h2>加入全球环保运动</h2>
+            <p>每一次行动都在改变世界。你的参与，就是希望的开始。</p>
+            <a href="#contact" class="btn">成为志愿者</a>
+        </div>
+
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>绿色网络</h3>
+                <p>我们致力于通过协作、教育和可持续解决方案保护地球。</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
+            <div class="footer-column">
+                <h3>快速导航</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                    <li><a href="#initiatives">项目</a></li>
+                    <li><a href="#contact">联系</a></li>
+                </ul>
             </div>
+            <div class="footer-column">
+                <h3>核心项目</h3>
+                <ul class="footer-links">
+                    <li><a href="#">全球造林</a></li>
+                    <li><a href="#">海洋清洁</a></li>
+                    <li><a href="#">野生动物保护</a></li>
+                    <li><a href="#">气候教育</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>联系方式</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 北京市朝阳区希望路1号</p>
+                <p><i class="fas fa-phone"></i> 400-123-4567</p>
+                <p><i class="fas fa-envelope"></i> hello@greennetwork.cn</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 绿色网络 版权所有 | 京ICP备12345678号</p>
         </div>
     </footer>
 
     <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
+        // 移动菜单
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
         });
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
+        // 点击链接关闭菜单
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    document.querySelector('.nav-links').classList.remove('active');
                 }
             });
+        });
+
+        // 暗黑模式
+        const themeBtn = document.querySelector('.theme-toggle');
+        const html = document.documentElement;
+
+        if (localStorage.getItem('theme') === 'dark' || 
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.setAttribute('data-theme', 'dark');
+            themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
         }
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+        themeBtn.addEventListener('click', () => {
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        });
 
-        // Smooth scrolling for navigation links
+        // 数字动画
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+
+        const animateCounter = (counter) => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText;
+            const inc = target / speed;
+
+            if (count < target) {
+                counter.innerText = Math.ceil(count + inc);
+                setTimeout(() => animateCounter(counter), 1);
+            } else {
+                counter.innerText = target.toLocaleString();
+            }
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target.querySelectorAll('.counter');
+                    counter.forEach(animateCounter);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stats').forEach(section => {
+            observer.observe(section);
+        });
+
+        // 表单提交
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = this.name.value.trim();
+            const email = this.email.value.trim();
+            const msg = this.message.value.trim();
+
+            if (!name || !email || !msg) {
+                showMsg('请填写所有必填项！', 'error');
+                return;
+            }
+            if (!email.includes('@')) {
+                showMsg('请输入有效邮箱！', 'error');
+                return;
+            }
+
+            showMsg('感谢您的消息！我们会尽快回复。', 'success');
+            this.reset();
+        });
+
+        function showMsg(text, type) {
+            const msg = document.getElementById('formMessage');
+            msg.textContent = text;
+            msg.className = `form-message ${type}`;
+            msg.style.display = 'block';
+            setTimeout(() => msg.style.display = 'none', 4000);
+        }
+
+        // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
                 e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
+                const target = document.querySelector(href);
+                if (target) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 80,
+                        top: target.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
                 }
             });
         });
     </script>
 </body>
-
 </html>
